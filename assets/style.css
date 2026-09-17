@@ -1,0 +1,159 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f7f7f8;
+  --fg: #1a1a1a;
+  --card: #ffffff;
+  --border: #e2e2e5;
+  --accent: #2f6f4f;
+  --accent-fg: #ffffff;
+  --muted: #6b6b70;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1115;
+    --fg: #e8e8ea;
+    --card: #171a21;
+    --border: #2a2e37;
+    --accent: #4caf7d;
+    --accent-fg: #0f1115;
+    --muted: #9a9aa2;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0 16px 48px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+header {
+  max-width: 880px;
+  margin: 0 auto;
+  padding-top: 40px;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-top: 0;
+}
+
+.progress-wrap {
+  max-width: 880px;
+  margin: 24px auto;
+}
+
+.progress-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.progress-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+}
+
+.module {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+
+.module-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.module-header input[type="checkbox"] {
+  margin-top: 4px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.module-title {
+  font-weight: 600;
+}
+
+.module-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 1px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.module.done .module-title {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.module-body {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.module-links {
+  margin-top: 8px;
+  font-size: 0.85rem;
+}
+
+.module-links a {
+  color: var(--accent);
+  text-decoration: none;
+  margin-right: 12px;
+}
+
+.module-links a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  max-width: 880px;
+  margin: 32px auto 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+footer a {
+  color: var(--accent);
+}

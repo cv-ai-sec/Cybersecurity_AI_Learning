@@ -1,0 +1,56 @@
+Using LMstudio to download models:
+	
+qwen/qwen2.5-vl-7b
+6.0GB
+
+google/gemma-2-9b
+5.8GB
+
+Then I would go into developer mode in LMstudio and load models locally
+This allows me to make requests to the local model
+
+So in these labs I will be conducting different attacks and defense mechanisms to simulate various forms of attacks on the local model
+
+
+====================================================================
+               AI SECURITY HANDS-ON LAB ROADMAP
+              OWASP Top 10 for LLMs / Agentic AI
+====================================================================
+
+[Completed] Lab 1: Direct System Prompt Extraction
+--------------------------------------------------------------------
+- Focus: OWASP LLM01 (Prompt Injection) & LLM02/LLM07 (Sensitive Info)
+- Goal: Extract confidential keys using JSON pre-fill tricks.
+- Defense: Python regex-based security egress filtering.
+
+
+[Completed] Lab 2: Indirect Prompt Injection & Delimiter Defense
+--------------------------------------------------------------------
+- Focus: OWASP LLM01 (Indirect Prompt Injection via Untrusted Files)
+- Goal: Payload hidden in auth_syslog.log (SSH username injection).
+- Defense: XML boundary wrapping (<log_data>) & tag sanitization.
+
+
+[Completed] Lab 3: Structured Parsing & Schema Validation
+--------------------------------------------------------------------
+- Focus: OWASP LLM02 (Sensitive Disclosure / Insecure Outputs)
+- Goal: Force raw model text into validated Pydantic JSON schema 
+  alert objects for robust pipeline integration.
+- Tooling: Python, Pydantic, Qwen 2.5 local server.
+
+
+[Completed] Lab 4: Excessive Agency & Tool Execution
+--------------------------------------------------------------------
+- Focus: OWASP LLM03 / ASI02 (Excessive Agency & Unsafe Function Calling)
+- Goal: Connect local LLM to executable Python functions (e.g., OS commands/
+  firewall IP bans).
+- Defense: Least-privilege controls and human-in-the-loop validation.
+
+
+[Completed] Lab 5: RAG & Vector Context Poisoning
+--------------------------------------------------------------------
+- Focus: OWASP LLM08 / LLM09 (Vector & Embedding Weaknesses / Context Poisoning)
+- Goal: Store threat intelligence in local ChromaDB vector store and 
+  execute retrieval-based data compromise.
+- Defense: Embedding sanitization, metadata filtering, and XML bounding.
+====================================================================
