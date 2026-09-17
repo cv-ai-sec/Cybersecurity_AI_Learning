@@ -1,7 +1,7 @@
 # LLM Security Labs
 
 **Live tracker:** _enable GitHub Pages (Settings → Pages → Deploy from `main`) and this link will
-serve `index.html`:_ `https://<your-username>.github.io/llm-security-labs/`
+serve `index.html`:_ `https://testpern1.github.io/Cybersecurity_AI_Learning/`
 
 ## Mission
 
