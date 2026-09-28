@@ -40,6 +40,14 @@ header {
   padding-top: 40px;
 }
 
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 h1 {
   font-size: 1.8rem;
   margin-bottom: 4px;
@@ -48,6 +56,137 @@ h1 {
 .subtitle {
   color: var(--muted);
   margin-top: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.tab-btn {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.tab-btn:hover {
+  color: var(--fg);
+}
+
+.tab-btn.active {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+.block {
+  max-width: 880px;
+  margin: 0 auto 32px;
+}
+
+.block h2 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.lede {
+  color: var(--muted);
+  max-width: 640px;
+}
+
+.flow {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px 0;
+}
+
+.flow-step {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  min-width: 140px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.flow-n {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.flow-title {
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.flow-tag {
+  color: var(--muted);
+  font-size: 0.72rem;
+  margin-top: 4px;
+}
+
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.flow-caption {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 10px;
+  max-width: 640px;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  font-size: 0.8rem;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.takeaways {
+  color: var(--muted);
+  max-width: 700px;
+  padding-left: 20px;
+}
+
+.takeaways li {
+  margin-bottom: 6px;
 }
 
 .progress-wrap {

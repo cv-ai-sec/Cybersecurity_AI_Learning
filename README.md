@@ -1,7 +1,10 @@
 # LLM Security Labs
 
-**Live tracker:** _enable GitHub Pages (Settings → Pages → Deploy from `main`) and this link will
-serve `index.html`:_ `https://testpern1.github.io/Cybersecurity_AI_Learning/`
+**[→ Live site](https://cv-ai-sec.github.io/Cybersecurity_AI_Learning/)** — Overview (mission,
+architecture, tools, takeaways) and Labs (the interactive write-up/progress tracker), no build step
+required. One-time setup on GitHub: **Settings → Pages → Source → Deploy from a branch**, branch
+`main`, folder `/ (root)` — this repo has no build step, so unlike `ai-cybersecurity-devops-lab`'s
+Vite dashboard, GitHub Actions isn't needed here at all; Pages serves `index.html` directly.
 
 ## Mission
 
@@ -55,7 +58,7 @@ Process notes and cross-lab reflections are in [docs/learning-journal.md](docs/l
 
 ```
 /
-├── index.html          # Interactive dashboard / progress tracker (GitHub Pages entry point)
+├── index.html          # Overview + interactive Labs tracker (GitHub Pages entry point, no build step)
 ├── assets/              # Dashboard styles and tracker script
 ├── docs/                # Process notes and cross-lab reflections
 ├── lab1 .. lab5/        # Attack script, defended script, and write-up per lab

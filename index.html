@@ -3,149 +3,237 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LLM Security Labs — Learning Tracker</title>
+  <title>LLM Security Labs</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
   <header>
-    <h1>LLM Security Labs</h1>
+    <div class="header-top">
+      <h1>LLM Security Labs</h1>
+      <nav class="tabs">
+        <button id="tab-overview" class="tab-btn">Overview</button>
+        <button id="tab-labs" class="tab-btn">Labs</button>
+      </nav>
+    </div>
     <p class="subtitle">
       A hands-on OWASP Top 10 for LLMs red team / blue team series, run entirely against local
-      models. Progress below is tracked in your browser only (nothing is sent anywhere).
+      models. Progress is tracked in your browser only — nothing is sent anywhere.
     </p>
   </header>
 
-  <div class="progress-wrap">
-    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-    <p class="progress-label" id="progress-label">0 / 0 modules complete</p>
+  <!-- ============================= OVERVIEW ============================= -->
+  <div id="view-overview">
+    <section class="block">
+      <h2>Purpose</h2>
+      <p class="lede">
+        Upskilling in AI security by actually red-teaming and then defending real LLM application
+        patterns — prompt injection, agentic tool-execution, RAG/vector poisoning — against models
+        running on local infrastructure. Every attack shown was actually run; every defense was
+        re-run against the same attack to confirm it holds.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>Architecture — how the labs progress</h2>
+      <p class="lede">
+        Five labs, moving through the OWASP Top 10 for LLMs in increasing order of blast radius —
+        each one builds on the pattern the last one taught.
+      </p>
+      <div class="flow">
+        <div class="flow-step">
+          <span class="flow-n">1</span>
+          <div class="flow-title">Leaked Secret</div>
+          <div class="flow-tag">LLM01/02/07</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <span class="flow-n">2</span>
+          <div class="flow-title">Misled Analyst</div>
+          <div class="flow-tag">LLM01</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <span class="flow-n">3</span>
+          <div class="flow-title">Corrupted Decision</div>
+          <div class="flow-tag">LLM02</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <span class="flow-n">4</span>
+          <div class="flow-title">Tool-Execution Breach</div>
+          <div class="flow-tag">LLM03/ASI02</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <span class="flow-n">5</span>
+          <div class="flow-title">Poisoned Knowledge Base</div>
+          <div class="flow-tag">LLM08/09</div>
+        </div>
+      </div>
+      <p class="flow-caption">
+        Each step widens the blast radius: from data disclosure, to a human making a bad call, to
+        an automated system making a bad call, to a real tool being triggered, to a shared
+        knowledge source corrupting every future decision that reads from it.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>Tools &amp; Stack</h2>
+      <div class="badges">
+        <span class="badge">LM Studio</span>
+        <span class="badge">Qwen 2.5 VL 7B</span>
+        <span class="badge">Gemma 2 9B</span>
+        <span class="badge">Python 3.12</span>
+        <span class="badge">Pydantic</span>
+        <span class="badge">ChromaDB</span>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Key Takeaways</h2>
+      <ul class="takeaways">
+        <li>Structuring output (JSON/schema) can weaken a model's adherence to safety instructions — validate business logic in code, not just shape.</li>
+        <li>Untrusted data (logs, RAG documents, tool outputs) must be wrapped and treated as inert data, never as instructions, regardless of how authoritative it reads.</li>
+        <li>An LLM connected to real tools/APIs needs least-privilege scoping and human approval for any consequential action.</li>
+        <li>Vector search relevance is not a security boundary; RAG pipelines need the same access control and provenance thinking as any other data source.</li>
+      </ul>
+    </section>
   </div>
 
-  <main>
-    <div class="module">
-      <label class="module-header">
-        <input type="checkbox" data-module-id="lab1" />
-        <div>
-          <span class="module-title">Lab 1 — Direct System Prompt Extraction</span>
-          <span class="module-tag">LLM01 / LLM02 / LLM07</span>
-          <div class="module-body">
-            JSON pre-fill trick to extract a "confidential" system key; defended with a
-            deterministic egress filter that redacts leaked secrets before they reach the user.
-          </div>
-          <div class="module-links">
-            <a href="lab1/lab1_explanation">Write-up</a>
-            <a href="lab1/lab1_system_extraction.py">Attack</a>
-            <a href="lab1/lab1_defended.py">Defense</a>
-          </div>
-        </div>
-      </label>
+  <!-- ============================= LABS ============================= -->
+  <div id="view-labs" class="hidden">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <p class="progress-label" id="progress-label">0 / 0 modules complete</p>
     </div>
 
-    <div class="module">
-      <label class="module-header">
-        <input type="checkbox" data-module-id="lab2" />
-        <div>
-          <span class="module-title">Lab 2 — Indirect Prompt Injection via Untrusted Logs</span>
-          <span class="module-tag">LLM01</span>
-          <div class="module-body">
-            Payload hidden inside an SSH username field in a log file; defended with XML boundary
-            wrapping and delimiter sanitization to isolate untrusted data from instructions.
+    <main>
+      <div class="module">
+        <label class="module-header">
+          <input type="checkbox" data-module-id="lab1" />
+          <div>
+            <span class="module-title">Lab 1 — Direct System Prompt Extraction</span>
+            <span class="module-tag">LLM01 / LLM02 / LLM07</span>
+            <div class="module-body">
+              JSON pre-fill trick to extract a "confidential" system key; defended with a
+              deterministic egress filter that redacts leaked secrets before they reach the user.
+            </div>
+            <div class="module-links">
+              <a href="lab1/lab1_explanation">Write-up</a>
+              <a href="lab1/lab1_system_extraction.py">Attack</a>
+              <a href="lab1/lab1_defended.py">Defense</a>
+            </div>
           </div>
-          <div class="module-links">
-            <a href="lab2/lab2_explanation">Write-up</a>
-            <a href="lab2/lab2_indirect_injection2.py">Attack</a>
-            <a href="lab2/lab2_defended.py">Defense</a>
-          </div>
-        </div>
-      </label>
-    </div>
+        </label>
+      </div>
 
-    <div class="module">
-      <label class="module-header">
-        <input type="checkbox" data-module-id="lab3" />
-        <div>
-          <span class="module-title">Lab 3 — Structured Parsing &amp; Schema Validation</span>
-          <span class="module-tag">LLM02</span>
-          <div class="module-body">
-            Forcing strict Pydantic-schema JSON output let an indirect injection silently flip a
-            block verdict to "monitor" while staying perfectly schema-valid — shape validation is
-            not correctness validation.
+      <div class="module">
+        <label class="module-header">
+          <input type="checkbox" data-module-id="lab2" />
+          <div>
+            <span class="module-title">Lab 2 — Indirect Prompt Injection via Untrusted Logs</span>
+            <span class="module-tag">LLM01</span>
+            <div class="module-body">
+              Payload hidden inside an SSH username field in a log file; defended with XML boundary
+              wrapping and delimiter sanitization to isolate untrusted data from instructions.
+            </div>
+            <div class="module-links">
+              <a href="lab2/lab2_explanation">Write-up</a>
+              <a href="lab2/lab2_indirect_injection2.py">Attack</a>
+              <a href="lab2/lab2_defended.py">Defense</a>
+            </div>
           </div>
-          <div class="module-links">
-            <a href="lab3/lab3_explanation">Write-up</a>
-            <a href="lab3/lab3_structured_parser.py">Code</a>
-          </div>
-        </div>
-      </label>
-    </div>
+        </label>
+      </div>
 
-    <div class="module">
-      <label class="module-header">
-        <input type="checkbox" data-module-id="lab4" />
-        <div>
-          <span class="module-title">Lab 4 — Excessive Agency &amp; Unsafe Tool Execution</span>
-          <span class="module-tag">LLM03 / ASI02</span>
-          <div class="module-body">
-            A model with live firewall-API access was manipulated via a poisoned "HIGH PRIORITY"
-            log entry into targeting a protected asset; defended with least-privilege policy checks
-            and a human-in-the-loop approval gate.
+      <div class="module">
+        <label class="module-header">
+          <input type="checkbox" data-module-id="lab3" />
+          <div>
+            <span class="module-title">Lab 3 — Structured Parsing &amp; Schema Validation</span>
+            <span class="module-tag">LLM02</span>
+            <div class="module-body">
+              Forcing strict Pydantic-schema JSON output let an indirect injection silently flip a
+              block verdict to "monitor" while staying perfectly schema-valid — shape validation is
+              not correctness validation.
+            </div>
+            <div class="module-links">
+              <a href="lab3/lab3_explanation">Write-up</a>
+              <a href="lab3/lab3_structured_parser.py">Code</a>
+            </div>
           </div>
-          <div class="module-links">
-            <a href="lab4/lab4_explanation">Write-up</a>
-            <a href="lab4/lab4_excessive_agency.py">Attack</a>
-            <a href="lab4/lab4_defended.py">Defense</a>
-          </div>
-        </div>
-      </label>
-    </div>
+        </label>
+      </div>
 
-    <div class="module">
-      <label class="module-header">
-        <input type="checkbox" data-module-id="lab5" />
-        <div>
-          <span class="module-title">Lab 5 — RAG &amp; Vector Context Poisoning</span>
-          <span class="module-tag">LLM08 / LLM09</span>
-          <div class="module-body">
-            A single planted document in a ChromaDB knowledge base overrode a threat verdict once
-            retrieval width widened enough to surface it — vector similarity is not a trust
-            boundary.
+      <div class="module">
+        <label class="module-header">
+          <input type="checkbox" data-module-id="lab4" />
+          <div>
+            <span class="module-title">Lab 4 — Excessive Agency &amp; Unsafe Tool Execution</span>
+            <span class="module-tag">LLM03 / ASI02</span>
+            <div class="module-body">
+              A model with live firewall-API access was manipulated via a poisoned "HIGH PRIORITY"
+              log entry into targeting a protected asset; defended with least-privilege policy checks
+              and a human-in-the-loop approval gate.
+            </div>
+            <div class="module-links">
+              <a href="lab4/lab4_explanation">Write-up</a>
+              <a href="lab4/lab4_excessive_agency.py">Attack</a>
+              <a href="lab4/lab4_defended.py">Defense</a>
+            </div>
           </div>
-          <div class="module-links">
-            <a href="lab5/lab5_explanation">Write-up</a>
-            <a href="lab5/lab5_rag_exploit.py">Attack</a>
-            <a href="lab5/setup_vector_db.py">Setup</a>
-          </div>
-        </div>
-      </label>
-    </div>
+        </label>
+      </div>
 
-    <div class="module">
-      <label class="module-header">
-        <input type="checkbox" data-module-id="stretch-guardrails" />
-        <div>
-          <span class="module-title">Stretch — Reusable Guardrail Library</span>
-          <span class="module-tag">In progress</span>
-          <div class="module-body">
-            Extract the egress filter, delimiter sanitizer, and tool-approval gate built across
-            labs 1, 2, and 4 into a small importable module other agent projects can reuse.
+      <div class="module">
+        <label class="module-header">
+          <input type="checkbox" data-module-id="lab5" />
+          <div>
+            <span class="module-title">Lab 5 — RAG &amp; Vector Context Poisoning</span>
+            <span class="module-tag">LLM08 / LLM09</span>
+            <div class="module-body">
+              A single planted document in a ChromaDB knowledge base overrode a threat verdict once
+              retrieval width widened enough to surface it — vector similarity is not a trust
+              boundary.
+            </div>
+            <div class="module-links">
+              <a href="lab5/lab5_explanation">Write-up</a>
+              <a href="lab5/lab5_rag_exploit.py">Attack</a>
+              <a href="lab5/setup_vector_db.py">Setup</a>
+            </div>
           </div>
-        </div>
-      </label>
-    </div>
+        </label>
+      </div>
 
-    <div class="module">
-      <label class="module-header">
-        <input type="checkbox" data-module-id="stretch-multiagent" />
-        <div>
-          <span class="module-title">Stretch — Multi-Agent Security Framework</span>
-          <span class="module-tag">Planned</span>
-          <div class="module-body">
-            Explore how these same OWASP LLM risks compound in a multi-agent setup, where one
-            agent's poisoned output becomes another agent's trusted input.
+      <div class="module">
+        <label class="module-header">
+          <input type="checkbox" data-module-id="stretch-guardrails" />
+          <div>
+            <span class="module-title">Stretch — Reusable Guardrail Library</span>
+            <span class="module-tag">In progress</span>
+            <div class="module-body">
+              Extract the egress filter, delimiter sanitizer, and tool-approval gate built across
+              labs 1, 2, and 4 into a small importable module other agent projects can reuse.
+            </div>
           </div>
-        </div>
-      </label>
-    </div>
-  </main>
+        </label>
+      </div>
+
+      <div class="module">
+        <label class="module-header">
+          <input type="checkbox" data-module-id="stretch-multiagent" />
+          <div>
+            <span class="module-title">Stretch — Multi-Agent Security Framework</span>
+            <span class="module-tag">Planned</span>
+            <div class="module-body">
+              Explore how these same OWASP LLM risks compound in a multi-agent setup, where one
+              agent's poisoned output becomes another agent's trusted input.
+            </div>
+          </div>
+        </label>
+      </div>
+    </main>
+  </div>
 
   <footer>
     <p>

@@ -1,4 +1,25 @@
 (function () {
+  function setupTabs() {
+    const tabs = {
+      overview: { btn: document.getElementById("tab-overview"), view: document.getElementById("view-overview") },
+      labs: { btn: document.getElementById("tab-labs"), view: document.getElementById("view-labs") },
+    };
+
+    function activate(name) {
+      for (const [key, { btn, view }] of Object.entries(tabs)) {
+        const isActive = key === name;
+        btn.classList.toggle("active", isActive);
+        view.classList.toggle("hidden", !isActive);
+      }
+    }
+
+    tabs.overview.btn.addEventListener("click", () => activate("overview"));
+    tabs.labs.btn.addEventListener("click", () => activate("labs"));
+    activate("overview");
+  }
+
+  document.addEventListener("DOMContentLoaded", setupTabs);
+
   const STORAGE_KEY = "llm-security-labs-progress";
 
   function loadState() {
