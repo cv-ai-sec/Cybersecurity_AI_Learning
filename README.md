@@ -6,6 +6,8 @@ required. One-time setup on GitHub: **Settings → Pages → Source → Deploy f
 `main`, folder `/ (root)` — this repo has no build step, so unlike `ai-cybersecurity-devops-lab`'s
 Vite dashboard, GitHub Actions isn't needed here at all; Pages serves `index.html` directly.
 
+Want to actually run a lab right now? See [docs/USER-GUIDE.md](docs/USER-GUIDE.md).
+
 ## Mission
 
 I'm actively upskilling in AI security — prompt injection defense, agentic tool-execution
@@ -60,7 +62,7 @@ Process notes and cross-lab reflections are in [docs/learning-journal.md](docs/l
 /
 ├── index.html          # Overview + interactive Labs tracker (GitHub Pages entry point, no build step)
 ├── assets/              # Dashboard styles and tracker script
-├── docs/                # Process notes and cross-lab reflections
+├── docs/                # USER-GUIDE.md (how to run a lab), learning-journal.md (process notes)
 ├── lab1 .. lab5/        # Attack script, defended script, and write-up per lab
 └── README.md
 ```
